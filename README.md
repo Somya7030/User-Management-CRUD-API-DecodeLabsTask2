@@ -75,16 +75,13 @@ DELETE /users/{id}
 400 → Validation errors
 409 → Duplicate email
 500 → Internal server error
-🧪 Run Locally
-Clone the repository:
-git clone https://github.com/YOUR_USERNAME/user-management-crud-api.git
-Navigate to project folder:
-cd user-management-crud-api
-Run the application:
-mvn spring-boot:run
-🌐 Base URL
 
+
+
+🌐 Base URL
 http://localhost:8080/users
+
+
 
 🧠 Learnings
 REST API design
@@ -92,6 +89,6 @@ CRUD operations
 Database integration using JPA
 Validation and exception handling
 Backend debugging
-📌 Author
 
+📌 Author
 Somya Saxena
