@@ -54,7 +54,7 @@ POST /users
   "lastName": "Saxena",
   "email": "somya@gmail.com",
   "phone": "9876543210"
-} ```
+} 
 🔹 Update User
 
 PUT /users/{id}
