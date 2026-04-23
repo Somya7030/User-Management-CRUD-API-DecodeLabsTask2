@@ -6,24 +6,13 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-/**
- * ──────────────────────────────────────────────
- * CONFIG LAYER — in.scalive.config
- * ──────────────────────────────────────────────
- * Seeds the database with sample data when the app starts.
- * This only runs if no users already exist — safe to keep
- * even after restarting when using H2.
- *
- * @Configuration → marks this as a source of @Bean definitions.
- * CommandLineRunner → runs the lambda after the app context is ready.
- */
 @Configuration
 public class DataSeeder {
 
     @Bean
     public CommandLineRunner seedData(UserRepository userRepository) {
         return args -> {
-            // Only seed if the table is empty
+            
             if (userRepository.count() == 0) {
                 userRepository.save(new User("Alice",   "Johnson", "alice@example.com",   "9876543210"));
                 userRepository.save(new User("Bob",     "Smith",   "bob@example.com",     "9123456780"));
