@@ -5,22 +5,6 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
-/**
- * ──────────────────────────────────────────────
- * MODEL LAYER — in.scalive.model
- * ──────────────────────────────────────────────
- * Represents the "users" table in the database.
- *
- * @Entity   → tells JPA this class maps to a DB table
- * @Table    → customises the table name
- * @Id      → marks the primary key field
- * @GeneratedValue → auto-increment the primary key
- *
- * Validation annotations (from spring-boot-starter-validation):
- *   @NotBlank → field must not be null or whitespace
- *   @Email    → must be a valid e-mail format
- *   @Size     → enforces min/max character length
- */
 @Entity
 @Table(name = "users")
 public class User {
@@ -51,7 +35,6 @@ public class User {
 
     // ── Constructors ───────────────────────────────────────
 
-    /** No-arg constructor required by JPA */
     public User() {}
 
     public User(String firstName, String lastName, String email, String phone) {
