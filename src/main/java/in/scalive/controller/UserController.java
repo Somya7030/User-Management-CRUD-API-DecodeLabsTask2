@@ -36,68 +36,28 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
-
-    // Constructor injection — preferred over @Autowired field injection
     public UserController(UserService userService) {
         this.userService = userService;
     }
 
-    // ──────────────────────────────────────────────────────
-    // GET /users  →  List all users
-    // ──────────────────────────────────────────────────────
-
-    /**
-     * Returns a list of all users.
-     * HTTP 200 OK with the list (may be empty — never 404 here).
-     */
     @GetMapping
     public ResponseEntity<List<User>> getAllUsers() {
         List<User> users = userService.getAllUsers();
         return ResponseEntity.ok(users);
     }
 
-    // ──────────────────────────────────────────────────────
-    // GET /users/{id}  →  Get a single user
-    // ──────────────────────────────────────────────────────
-
-    /**
-     * Returns the user with the given ID.
-     * HTTP 200 OK, or 404 Not Found if no such user exists.
-     */
     @GetMapping("/{id}")
     public ResponseEntity<User> getUserById(@PathVariable Long id) {
         User user = userService.getUserById(id);
         return ResponseEntity.ok(user);
     }
 
-    // ──────────────────────────────────────────────────────
-    // POST /users  →  Create a new user
-    // ──────────────────────────────────────────────────────
-
-    /**
-     * Creates a new user from the JSON request body.
-     *
-     * @Valid triggers Bean Validation on the User object.
-     * If any constraint fails, Spring throws MethodArgumentNotValidException
-     * which GlobalExceptionHandler catches and returns HTTP 400.
-     *
-     * HTTP 201 Created on success, 400 on validation failure,
-     * 409 Conflict if email already exists.
-     */
     @PostMapping
     public ResponseEntity<User> createUser(@Valid @RequestBody User user) {
         User createdUser = userService.createUser(user);
         return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
     }
 
-    // ──────────────────────────────────────────────────────
-    // PUT /users/{id}  →  Update an existing user
-    // ──────────────────────────────────────────────────────
-
-    /**
-     * Replaces all fields of an existing user with the provided values.
-     * HTTP 200 OK on success, 404 if not found, 409 if email conflict.
-     */
     @PutMapping("/{id}")
     public ResponseEntity<User> updateUser(
             @PathVariable Long id,
@@ -107,15 +67,6 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 
-    // ──────────────────────────────────────────────────────
-    // DELETE /users/{id}  →  Delete a user
-    // ──────────────────────────────────────────────────────
-
-    /**
-     * Deletes the user with the given ID.
-     * HTTP 204 No Content on success (no body returned).
-     * HTTP 404 if the user doesn't exist.
-     */
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
         userService.deleteUser(id);
