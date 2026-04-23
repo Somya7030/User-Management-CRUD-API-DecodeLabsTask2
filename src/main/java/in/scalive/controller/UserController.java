@@ -9,27 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-/**
- * ──────────────────────────────────────────────
- * CONTROLLER LAYER — in.scalive.controller
- * ──────────────────────────────────────────────
- * Handles incoming HTTP requests and delegates
- * all business logic to the UserService.
- *
- * Controllers should be THIN — no business logic here.
- * They only:
- *   1. Accept the HTTP request & extract inputs
- *   2. Call the appropriate service method
- *   3. Return the HTTP response with correct status code
- *
- * @RestController = @Controller + @ResponseBody
- *   → every method return value is serialised to JSON automatically
- *
- * @RequestMapping("/users") → base URL prefix for all endpoints
- *
- * @CrossOrigin → allows calls from any frontend origin (e.g., React dev server).
- *   Restrict this in production: @CrossOrigin(origins = "https://yourfrontend.com")
- */
 @RestController
 @RequestMapping("/users")
 @CrossOrigin(origins = "*")
