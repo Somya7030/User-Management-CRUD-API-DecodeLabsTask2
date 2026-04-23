@@ -11,21 +11,6 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * ──────────────────────────────────────────────
- * EXCEPTION LAYER — GlobalExceptionHandler
- * ──────────────────────────────────────────────
- * Centralises error handling for ALL controllers.
- *
- * @RestControllerAdvice →
- *   Combines @ControllerAdvice + @ResponseBody.
- *   Any exception thrown anywhere in the app reaches
- *   one of the @ExceptionHandler methods here, which
- *   then builds and returns a clean JSON error response.
- *
- * Without this, Spring would return its default white-label
- * error page or a messy stack trace.
- */
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
@@ -60,7 +45,7 @@ public class GlobalExceptionHandler {
     }
 
     // ── 3. Validation Errors (HTTP 400) ───────────────────
-    // Triggered when @Valid fails on a @RequestBody parameter
+   
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String, Object>> handleValidationErrors(
             MethodArgumentNotValidException ex,
@@ -72,7 +57,7 @@ public class GlobalExceptionHandler {
             fieldErrors.put(fieldError.getField(), fieldError.getDefaultMessage());
         }
 
-        // Build a richer response that includes the per-field breakdown
+        
         Map<String, Object> response = new HashMap<>();
         response.put("status",  HttpStatus.BAD_REQUEST.value());
         response.put("error",   "Validation Failed");
@@ -84,7 +69,7 @@ public class GlobalExceptionHandler {
     }
 
     // ── 4. Generic Fallback (HTTP 500) ────────────────────
-    // Catches any other unexpected exception
+    
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleGenericException(
             Exception ex,
